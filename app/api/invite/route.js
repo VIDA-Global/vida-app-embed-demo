@@ -15,8 +15,7 @@ export async function POST(req) {
   const invites = await getInvites();
   invites.push({
     id: await generateId("inv"),
-    businessId: user.businessId,
-    fullName,
+    accountId: user.accountId,
     email,
     password: hashPassword(password),
   });
