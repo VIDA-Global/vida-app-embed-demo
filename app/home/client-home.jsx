@@ -4,17 +4,23 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function ClientHome({ user }) {
+  const [showInvite, setShowInvite] = useState(false);
+  const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
+  const [invitePassword, setInvitePassword] = useState("");
   const router = useRouter();
 
   const invite = async () => {
-    if (!inviteEmail) return;
+    if (!inviteName || !inviteEmail || !invitePassword) return;
     await fetch("/api/invite", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: inviteEmail }),
+      body: JSON.stringify({ fullName: inviteName, email: inviteEmail, password: invitePassword }),
     });
+    setInviteName("");
     setInviteEmail("");
+    setInvitePassword("");
+    setShowInvite(false);
   };
 
   const logout = async () => {
@@ -27,6 +33,12 @@ export default function ClientHome({ user }) {
       <header className="flex justify-between items-center p-4 border-b">
         <div className="text-xl font-bold">Alma AI</div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowInvite(true)}
+            className="underline mr-4"
+          >
+            Invite
+          </button>
           <span>{user.fullName}</span>
           <Image
             src="/avatar-placeholder.png"
@@ -39,17 +51,46 @@ export default function ClientHome({ user }) {
           </button>
         </div>
       </header>
-      <div className="p-4 flex items-center gap-2 border-b">
-        <input
-          className="border p-2 flex-grow"
-          placeholder="Invite user email"
-          value={inviteEmail}
-          onChange={(e) => setInviteEmail(e.target.value)}
-        />
-        <button onClick={invite} className="bg-blue-500 text-white p-2">
-          Invite
-        </button>
-      </div>
+      {showInvite && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="bg-white p-4 rounded shadow max-w-md w-full">
+            <h2 className="text-xl mb-4">Invite User</h2>
+            <div className="flex flex-col gap-3">
+              <input
+                className="border p-2"
+                placeholder="Full Name"
+                value={inviteName}
+                onChange={(e) => setInviteName(e.target.value)}
+              />
+              <input
+                className="border p-2"
+                placeholder="Email"
+                type="email"
+                value={inviteEmail}
+                onChange={(e) => setInviteEmail(e.target.value)}
+              />
+              <input
+                className="border p-2"
+                placeholder="Password"
+                type="password"
+                value={invitePassword}
+                onChange={(e) => setInvitePassword(e.target.value)}
+              />
+              <div className="flex justify-end gap-2">
+                <button
+                  onClick={() => setShowInvite(false)}
+                  className="underline"
+                >
+                  Cancel
+                </button>
+                <button onClick={invite} className="bg-blue-500 text-white p-2">
+                  Invite
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
       <iframe className="flex-grow" src="https://vida.io/app/embed" />
     </div>
   );
