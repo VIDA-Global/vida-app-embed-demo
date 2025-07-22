@@ -12,7 +12,7 @@ export async function POST(req) {
   const invites = await getInvites();
   invites.push({
     id: await generateId("inv"),
-    businessId: user.businessId,
+    accountId: user.accountId,
     email,
   });
   await saveInvites(invites);
