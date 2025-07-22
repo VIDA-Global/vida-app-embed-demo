@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {
-  const [businessName, setBusinessName] = useState("");
+  const [accountName, setAccountName] = useState("");
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +16,7 @@ export default function Signup() {
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ businessName, email, fullName, password }),
+      body: JSON.stringify({ accountName, email, fullName, password }),
     });
     if (res.ok) {
       router.push("/home");
@@ -32,9 +32,9 @@ export default function Signup() {
       <form onSubmit={submit} className="flex flex-col gap-3">
         <input
           className="border p-2"
-          placeholder="Business Name"
-          value={businessName}
-          onChange={(e) => setBusinessName(e.target.value)}
+          placeholder="Account Name"
+          value={accountName}
+          onChange={(e) => setAccountName(e.target.value)}
         />
         <input
           className="border p-2"
