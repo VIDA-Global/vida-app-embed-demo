@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { getInvites, saveInvites, generateId } from "../../../lib/db.js";
-import { getUserFromSession } from "../../../lib/auth.js";
+import { getUserFromSession, hashPassword } from "../../../lib/auth.js";
 
 export async function POST(req) {
-  const { email } = await req.json();
+  const { fullName, email, password } = await req.json();
+  if (!fullName || !email || !password) {
+    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+  }
   const token = req.cookies.get("session")?.value;
   const user = await getUserFromSession(token);
   if (!user) {
@@ -14,6 +17,7 @@ export async function POST(req) {
     id: await generateId("inv"),
     accountId: user.accountId,
     email,
+    password: hashPassword(password),
   });
   await saveInvites(invites);
   return NextResponse.json({ success: true });
