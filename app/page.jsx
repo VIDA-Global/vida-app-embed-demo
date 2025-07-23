@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getUserFromSession } from "../lib/auth.js";
 import LoggedOutHeader from "./components/LoggedOutHeader";
-import { APP_NAME, VIDA_TARGET } from "../lib/config.js";
+import { APP_NAME, VIDA_TARGET } from "../config/constants.js";
 
 export default async function Index() {
   const session = (await cookies()).get("session")?.value;

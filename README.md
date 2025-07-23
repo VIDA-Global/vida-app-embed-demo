@@ -20,6 +20,9 @@ Copy `.env.example` to `.env.local` and provide your Vida credentials:
 - `VIDA_API_TOKEN` – API token with access to Vida's public API
 - `VIDA_RESELLER_ID` – your reseller ID used when creating organizations
 
+Configuration constants referenced throughout the app can be adjusted in
+`config/constants.js`.
+
 These values are used by `app/api/vida/route.js` when calling Vida's API. They ensure that any organizations created through the demo are associated with your reseller account.
 
 ## How embedding works

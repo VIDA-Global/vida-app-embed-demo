@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { APP_NAME } from "../../lib/config.js";
+import { APP_NAME } from "../../config/constants.js";
 
 export default function LoggedOutHeader() {
   return (

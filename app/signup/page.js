@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { APP_NAME } from "../../lib/config.js";
+import { APP_NAME } from "../../config/constants.js";
 import LoggedOutHeader from "../components/LoggedOutHeader";
 import ErrorModal from "../components/ErrorModal";
 

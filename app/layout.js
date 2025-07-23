@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { APP_NAME, VIDA_SCRIPT_SRC } from "../lib/config.js";
+import { APP_NAME, VIDA_SCRIPT_SRC } from "../config/constants.js";
 
 // The Vida embed script is loaded globally here so that any page can use the
 // `data-vida-button` attribute or embed the Vida app iframe.
