@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export default function ClientHome({ user }) {
+export default function ClientHome({ user, account }) {
   const [showInvite, setShowInvite] = useState(false);
   const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
@@ -64,16 +64,18 @@ export default function ClientHome({ user }) {
           </button>
           <div className="flex items-center gap-2">
             <div>
-          <div>{user.fullName}</div>
-          <div>{JSON.stringify(user)}</div>
-          </div>
-          <Image
-          className="rounded-full"
-            src="/avatar.png"
-            alt="avatar"
-            width={32}
-            height={32}
-          />
+              <div>{user.fullName}</div>
+              {account && (
+                <div className="text-sm text-gray-600">{account.name}</div>
+              )}
+            </div>
+            <Image
+              className="rounded-full"
+              src="/avatar.png"
+              alt="avatar"
+              width={32}
+              height={32}
+            />
           </div>
         </div>
       </header>
