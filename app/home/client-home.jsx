@@ -6,6 +6,7 @@ import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../lib/config.js";
 
 export default function ClientHome({ user, account }) {
   const [vida, setVida] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Fetch Vida account information and a one-time authentication token as soon
   // as the component mounts. The token allows the iframe below to log the user
@@ -17,9 +18,11 @@ export default function ClientHome({ user, account }) {
         if (res.ok) {
           const data = await res.json();
           setVida(data);
+          setLoading(false);
         }
       } catch (err) {
         console.error(err);
+        setLoading(false);
       }
     };
     load();
@@ -40,16 +43,20 @@ export default function ClientHome({ user, account }) {
         <UserMenu user={user} account={account} />
         <div className="border-t border-[rgba(0,0,0,0.075)] absolute left-0 right-0 top-14 mt-[px] shadow" />
       </header>
-      {vida?.oneTimeAuthToken && (
-        <iframe
-          className="flex-grow"
+      {loading ? (
+        <div className="flex-grow flex items-center justify-center text-gray-600">
+          Loading account...
+        </div>
+      ) : (
+        vida?.oneTimeAuthToken && (
+          <iframe
+            className="flex-grow"
           // The Vida web app is embedded directly in our page. We pass the
           // one-time token and the user's email so the session is created
           // automatically.
-          src={`${VIDA_EMBED_BASE_URL}?authToken=${
-            vida.oneTimeAuthToken
-          }&email=${encodeURIComponent(user.email)}`}
-        />
+            src={`${VIDA_EMBED_BASE_URL}?authToken=${vida.oneTimeAuthToken}&email=${encodeURIComponent(user.email)}`}
+          />
+        )
       )}
     </div>
   );

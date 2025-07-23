@@ -14,7 +14,7 @@ export default async function Index() {
     <>
       <LoggedOutHeader />
       <div className="flex flex-col items-start justify-center mt-20 mx-auto w-full max-w-3xl">
-        <div className="text-6xl">👋</div>
+        <div className="text-8xl">👋</div>
         <h1 className="text-4xl font-bold mt-12 mb-3 text-left">
           Welcome to {APP_NAME}
         </h1>
