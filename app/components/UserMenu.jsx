@@ -23,15 +23,15 @@ export default function UserMenu({ user, account }) {
         <div className="text-right">
           <div className="text-sm">{user.fullName}</div>
           {account && (
-            <div className="text-xs text-gray-600">{account.name}</div>
+            <div className="text-xs text-gray-600 -mt-0.5">{account.name}</div>
           )}
         </div>
         <Image
           className="rounded-full grayscale"
           src="/avatar.png"
           alt="avatar"
-          width={36}
-          height={36}
+          width={32}
+          height={32}
         />
       </button>
       {open && (
