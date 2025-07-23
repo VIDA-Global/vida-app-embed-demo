@@ -3,10 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import InviteModal from "./InviteModal";
+import ManageTeamModal from "./ManageTeamModal";
 
 export default function UserMenu({ user, account }) {
   const [open, setOpen] = useState(false);
   const [showInvite, setShowInvite] = useState(false);
+  const [showManage, setShowManage] = useState(false);
   const router = useRouter();
 
   const logout = async () => {
@@ -45,6 +47,15 @@ export default function UserMenu({ user, account }) {
           >
             Invite
           </button>
+          <button
+            onClick={() => {
+              setShowManage(true);
+              setOpen(false);
+            }}
+            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+          >
+            Manage Team
+          </button>
           <div className="border-t border-gray-200"></div>
           <button
             onClick={logout}
@@ -55,6 +66,11 @@ export default function UserMenu({ user, account }) {
         </div>
       )}
       <InviteModal open={showInvite} onClose={() => setShowInvite(false)} />
+      <ManageTeamModal
+        user={user}
+        open={showManage}
+        onClose={() => setShowManage(false)}
+      />
     </div>
   );
 }
