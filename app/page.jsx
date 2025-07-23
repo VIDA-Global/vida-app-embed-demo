@@ -37,6 +37,8 @@ export default async function Index() {
           // data-number={demoAccounts[props.id].number}
           data-type="call"
         >
+          {/* This button is powered by Vida's embed script. When clicked it will
+              initiate a demo phone call using the configured target account. */}
           📞
           Call Demo
         </button>

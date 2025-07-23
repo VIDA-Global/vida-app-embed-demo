@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import { APP_NAME, VIDA_SCRIPT_SRC } from "../lib/config.js";
 
+// The Vida embed script is loaded globally here so that any page can use the
+// `data-vida-button` attribute or embed the Vida app iframe.
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
