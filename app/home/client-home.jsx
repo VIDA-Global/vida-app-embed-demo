@@ -23,7 +23,7 @@ export default function ClientHome({ user, account }) {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="flex justify-between items-center p-4 border-b border-gray-200 gap-2">
+      <header className="flex justify-between items-center p-4 gap-2">
         <Image
           src="/logo.jpg"
           alt="logo"
@@ -49,8 +49,8 @@ export default function ClientHome({ user, account }) {
       )} */}
       {vida?.oneTimeAuthToken && (
         <iframe
-          className="flex-grow"
-          src={`https://alma.automatedphone.ai/app/embed?authToken=${
+          className="flex-grow border-t border-gray-200"
+          src={`https://ninjoah.ngrok.io/app/embed?authToken=${
             vida.oneTimeAuthToken
           }&email=${encodeURIComponent(user.email)}`}
         />

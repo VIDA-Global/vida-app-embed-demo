@@ -45,6 +45,7 @@ export async function GET(req) {
           orgName,
           email: user.email,
           externalAccountId: user.accountId,
+          vidaPremium: false
         }
       );
       console.log("Creating organization response:", createData);

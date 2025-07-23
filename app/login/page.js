@@ -29,7 +29,7 @@ export default function Login() {
     <>
       <LoggedOutHeader />
       <div className="p-8 max-w-md mx-auto">
-        <h1 className="text-2xl mb-4 text-center">Login</h1>
+        <h1 className="text-2xl mb-6 text-center font-medium">Login</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
         <input
           className="border border-gray-300 p-2 rounded-lg"
@@ -50,12 +50,6 @@ export default function Login() {
           Login
         </button>
       </form>
-      <p className="mt-4">
-        or{" "}
-        <a href="/signup" className="text-primary underline">
-          Sign Up
-        </a>
-      </p>
       </div>
     </>
   );

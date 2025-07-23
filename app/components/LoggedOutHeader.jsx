@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function LoggedOutHeader() {
   return (
-    <header className="flex justify-between items-center p-4 border-b border-gray-200 gap-2">
+    <header className="flex justify-between items-center p-4 gap-2">
       <Link href="/" className="flex items-center gap-2">
         <Image src="/logo.jpg" alt="logo" className="rounded-lg scale-90" width={32} height={32} />
         <span className="text-lg font-semibold">Alma AI</span>
