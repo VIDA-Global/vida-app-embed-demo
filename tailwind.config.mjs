@@ -1,13 +1,9 @@
-const config = {
-  content: ['./app/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {
-      colors: {
-        primary: '#7C00FF',
-      },
-    },
-  },
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: { /* … */ },
   plugins: [],
-};
-
-export default config;
+}
