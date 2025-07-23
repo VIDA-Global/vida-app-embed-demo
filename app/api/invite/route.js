@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
-import { getInvites, saveInvites, generateId } from "../../../lib/db.js";
+import {
+  getInvites,
+  saveInvites,
+  generateId,
+} from "../../../lib/db.js";
 import { getUserFromSession, hashPassword } from "../../../lib/auth.js";
+import { sendInviteEmail } from "../../../lib/email.js";
 
 export async function POST(req) {
   const { fullName, email, password } = await req.json();
@@ -13,12 +18,23 @@ export async function POST(req) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const invites = await getInvites();
+  const id = await generateId("inv");
   invites.push({
-    id: await generateId("inv"),
+    id,
     accountId: user.accountId,
     email,
+    fullName,
     password: hashPassword(password),
   });
   await saveInvites(invites);
+
+  const baseUrl = process.env.INVITE_BASE_URL || "http://localhost:3000";
+  const inviteUrl = `${baseUrl}/signup?invite=${id}`;
+  try {
+    await sendInviteEmail(email, inviteUrl);
+  } catch (err) {
+    console.error("Failed to send invite email", err);
+  }
+
   return NextResponse.json({ success: true });
 }
