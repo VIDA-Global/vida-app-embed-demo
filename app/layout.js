@@ -9,6 +9,9 @@ const inter = Inter({
 export const metadata = {
   title: "Alma AI",
   description: "Demo for embedding the Vida app",
+  icons: {
+    icon: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({ children }) {
