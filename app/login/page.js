@@ -2,17 +2,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoggedOutHeader from "../components/LoggedOutHeader";
+import ErrorModal from "../components/ErrorModal";
 import { APP_NAME } from "../lib/config.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const submit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(null);
     const res = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -50,7 +51,11 @@ export default function Login() {
         <button className="bg-purple-700 text-white p-3 rounded-lg font-semibold mt-3" type="submit">
           Log In
         </button>
-        {error && <p className="text-red-600">{error}</p>}
+        <ErrorModal
+          open={!!error}
+          onClose={() => setError(null)}
+          message={error}
+        />
       </form>
       </div>
     </>

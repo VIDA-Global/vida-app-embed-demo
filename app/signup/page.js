@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoggedOutHeader from "../components/LoggedOutHeader";
+import ErrorModal from "../components/ErrorModal";
 import { APP_NAME } from "../lib/config.js";
 
 export default function Signup() {
@@ -9,12 +10,12 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const submit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(null);
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -69,14 +70,11 @@ export default function Signup() {
           >
             Sign Up
           </button>
-          {error && (
-            <div
-              className="text-red-600 mt-4 text-center"
-              onClick={() => setError(null)}
-            >
-              {error}
-            </div>
-          )}
+          <ErrorModal
+            open={!!error}
+            onClose={() => setError(null)}
+            message={error}
+          />
         </form>
       </div>
     </>
