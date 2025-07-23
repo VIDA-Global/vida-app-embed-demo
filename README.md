@@ -40,6 +40,19 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Create a `.env.local` file based on `.env.example` and add your Vida API token
 and reseller ID. The variables `VIDA_API_TOKEN` and `VIDA_RESELLER_ID` are used
-by the `/api/account` route to call Vida's APIs for fetching and creating
+by the `/api/vida` route to call Vida's APIs for fetching and creating
 organizations. The reseller ID identifies the reseller account under which new
 organizations are created when an account is missing in Vida.
+
+## Vida integration API route
+
+The endpoint at `/api/vida` shows how to embed Vida into your own
+application. It performs the following steps:
+
+1. Look up the user's account in Vida based on the `externalAccountId`.
+2. Create a new organization in Vida when the account does not exist.
+3. Request a one‑time authentication token that can be passed to the Vida
+   embed script.
+
+See `app/api/vida/route.js` for the full implementation and the helper
+functions in `lib/vida.js`.
