@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import InviteModal from "./InviteModal";
@@ -12,6 +12,17 @@ export default function UserMenu({ user, account }) {
   const [showManage, setShowManage] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const router = useRouter();
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (open && menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [open]);
 
   const logout = async () => {
     await fetch("/api/logout", { method: "POST" });
@@ -19,7 +30,7 @@ export default function UserMenu({ user, account }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-3 focus:outline-none cursor-pointer"

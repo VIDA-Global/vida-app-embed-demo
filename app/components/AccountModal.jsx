@@ -39,8 +39,14 @@ export default function AccountModal({ open, onClose, account }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-5 rounded-2xl shadow max-w-md w-full">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black/50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white p-5 rounded-2xl shadow max-w-md w-full"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Account</h2>
           <button onClick={onClose} className="text-gray-700">
