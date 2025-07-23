@@ -34,14 +34,19 @@ export default function ManageTeamModal({ open, onClose, user }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-4 rounded shadow max-w-md w-full">
-        <h2 className="text-xl mb-4">Manage Team</h2>
+      <div className="bg-white p-5 rounded-2xl shadow max-w-md w-full">
+        <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-semibold">Manage Team</h2>
+          <button onClick={onClose} className="underline">
+            Close
+          </button>
+        </div>
         {loading ? (
           <p className="mb-4">Loading...</p>
         ) : (
           <ul className="flex flex-col gap-2 mb-4">
             {members.map((m) => (
-              <li key={m.id} className="flex justify-between items-center">
+              <li key={m.id} className="flex justify-between items-center rounded-lg bg-gray-100 p-3 -mx-2">
                 <span>{m.fullName || m.email}</span>
                 {m.id !== user.id && (
                   <button
@@ -55,12 +60,9 @@ export default function ManageTeamModal({ open, onClose, user }) {
             ))}
           </ul>
         )}
-        <div className="flex justify-between">
-          <button onClick={() => setShowInvite(true)} className="underline">
+        <div className="flex justify-between mt-6">
+          <button onClick={() => setShowInvite(true)} className="text-blue-600">
             Invite
-          </button>
-          <button onClick={onClose} className="underline">
-            Close
           </button>
         </div>
         <InviteModal
