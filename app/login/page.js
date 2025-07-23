@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoggedOutHeader from "../components/LoggedOutHeader";
+import { APP_NAME } from "../lib/config.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function Login() {
     <>
       <LoggedOutHeader />
       <div className="p-8 max-w-md mx-auto">
-        <h1 className="text-2xl mb-6 text-center font-bold">Log In to Alma</h1>
+        <h1 className="text-2xl mb-6 text-center font-bold">Log In to {APP_NAME}</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
         <input
           className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"

@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getUserFromSession } from "../lib/auth.js";
 import LoggedOutHeader from "./components/LoggedOutHeader";
+import { APP_NAME, VIDA_TARGET } from "../lib/config.js";
 
 export default async function Index() {
   const session = (await cookies()).get("session")?.value;
@@ -15,7 +16,7 @@ export default async function Index() {
       <div className="flex flex-col items-start justify-center mt-20 mx-auto w-full max-w-3xl">
         <div className="text-6xl">👋</div>
         <h1 className="text-4xl font-bold mt-12 mb-3 text-left">
-          Welcome to Alma AI
+          Welcome to {APP_NAME}
         </h1>
         <h2 className="text-base max-w-xl">
           Experience the power of an AI phone agent to save time, boost productivity, and
@@ -32,7 +33,7 @@ export default async function Index() {
           href="/signup"
           className="bg-gray-200 text-gray-700 px-5 py-3 rounded-lg font-medium text-base"
           data-vida-button
-          data-target="ninjoah"
+          data-target={VIDA_TARGET}
           // data-number={demoAccounts[props.id].number}
           data-type="call"
         >
