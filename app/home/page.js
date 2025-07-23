@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getUserFromSession } from "../../lib/auth.js";
+import { getAccounts } from "../../lib/db.js";
 import ClientHome from "./client-home";
 
 export default async function HomePage() {
@@ -9,5 +10,7 @@ export default async function HomePage() {
   if (!user) {
     redirect("/login");
   }
-  return <ClientHome user={user} />;
+  const accounts = await getAccounts();
+  const account = accounts.find((a) => a.id === user.accountId) || null;
+  return <ClientHome user={user} account={account} />;
 }
