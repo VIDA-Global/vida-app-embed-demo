@@ -25,13 +25,13 @@ export default function ClientHome({ user, account }) {
     <div className="flex flex-col h-screen">
       <header className="flex justify-between items-center p-4 border-b border-gray-200 gap-2">
         <Image
-                  src="/logo.jpg"
-                  alt="logo"
-                  className="rounded-lg"
-                  width={32}
-                  height={32}
-                />
-        <div className="text-lg font-bold flex-1">Alma AI</div>
+          src="/logo.jpg"
+          alt="logo"
+          className="rounded-lg scale-90"
+          width={32}
+          height={32}
+        />
+        <div className="text-lg font-semibold flex-1">Alma AI</div>
 
         <UserMenu user={user} account={account} />
       </header>
