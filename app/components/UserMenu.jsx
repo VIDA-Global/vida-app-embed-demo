@@ -4,11 +4,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import InviteModal from "./InviteModal";
 import ManageTeamModal from "./ManageTeamModal";
+import AccountModal from "./AccountModal";
 
 export default function UserMenu({ user, account }) {
   const [open, setOpen] = useState(false);
   const [showInvite, setShowInvite] = useState(false);
   const [showManage, setShowManage] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
   const router = useRouter();
 
   const logout = async () => {
@@ -56,6 +58,15 @@ export default function UserMenu({ user, account }) {
           >
             Manage Team
           </button>
+          <button
+            onClick={() => {
+              setShowAccount(true);
+              setOpen(false);
+            }}
+            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+          >
+            Account
+          </button>
           <div className="border-t border-gray-200"></div>
           <button
             onClick={logout}
@@ -70,6 +81,11 @@ export default function UserMenu({ user, account }) {
         user={user}
         open={showManage}
         onClose={() => setShowManage(false)}
+      />
+      <AccountModal
+        open={showAccount}
+        onClose={() => setShowAccount(false)}
+        account={account}
       />
     </div>
   );
