@@ -26,8 +26,14 @@ export default function InviteModal({ open, onClose }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-5 rounded-2xl shadow max-w-md w-full">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black/50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white p-5 rounded-2xl shadow max-w-md w-full"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2 className="text-xl mb-4 font-semibold">Invite User</h2>
         <form
           autoComplete="off"
