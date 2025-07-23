@@ -20,7 +20,6 @@ export default function ClientHome({ user, account }) {
     load();
   }, []);
 
-
   return (
     <div className="flex flex-col h-screen">
       <header className="flex justify-between items-center p-4 border-b border-gray-200">
@@ -42,13 +41,9 @@ export default function ClientHome({ user, account }) {
       {vida?.oneTimeAuthToken && (
         <iframe
           className="flex-grow"
-          src={
-            vida?.oneTimeAuthToken
-              ? `https://vida.io/app/embed?authToken=${
-                  vida.oneTimeAuthToken
-                }&email=${encodeURIComponent(user.email)}`
-              : "https://vida.io/app/embed"
-          }
+          src={`https://alma.automatedphone.ai/app/embed?authToken=${
+            vida.oneTimeAuthToken
+          }&email=${encodeURIComponent(user.email)}`}
         />
       )}
     </div>

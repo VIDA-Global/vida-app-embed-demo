@@ -18,24 +18,24 @@ export default function UserMenu({ user, account }) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 focus:outline-none"
+        className="flex items-center gap-3 focus:outline-none cursor-pointer"
       >
-        <div className="text-left">
-          <div>{user.fullName}</div>
+        <div className="text-right">
+          <div className="text-sm">{user.fullName}</div>
           {account && (
-            <div className="text-sm text-gray-600">{account.name}</div>
+            <div className="text-xs text-gray-600">{account.name}</div>
           )}
         </div>
         <Image
-          className="rounded-full"
+          className="rounded-full grayscale"
           src="/avatar.png"
           alt="avatar"
-          width={32}
-          height={32}
+          width={36}
+          height={36}
         />
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow">
+        <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow overflow-hidden">
           <button
             onClick={() => {
               setShowInvite(true);
@@ -45,6 +45,7 @@ export default function UserMenu({ user, account }) {
           >
             Invite
           </button>
+          <div className="border-t border-gray-200"></div>
           <button
             onClick={logout}
             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
