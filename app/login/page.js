@@ -29,7 +29,7 @@ export default function Login() {
     <>
       <LoggedOutHeader />
       <div className="p-8 max-w-md mx-auto">
-        <h1 className="text-2xl mb-6 text-center font-medium">Login</h1>
+        <h1 className="text-2xl mb-6 text-center font-bold">Log In to Alma</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
         <input
           className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
@@ -45,8 +45,8 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="bg-purple-700 text-white p-2 rounded-lg" type="submit">
-          Login
+        <button className="bg-purple-700 text-white p-3 rounded-lg font-semibold mt-3" type="submit">
+          Log In
         </button>
         {error && <p className="text-red-600">{error}</p>}
       </form>
