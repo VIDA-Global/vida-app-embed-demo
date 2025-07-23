@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import UserMenu from "../components/UserMenu";
 import Image from "next/image";
-import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../lib/config.js";
+import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../config/constants.js";
 
 export default function ClientHome({ user, account }) {
   const [vida, setVida] = useState(null);
