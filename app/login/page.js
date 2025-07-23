@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { APP_NAME } from "../../lib/config.js";
 import LoggedOutHeader from "../components/LoggedOutHeader";
 import ErrorModal from "../components/ErrorModal";
-import { APP_NAME } from "../lib/config.js";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
