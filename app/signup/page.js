@@ -60,7 +60,7 @@ export default function Signup() {
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && <p className="text-red-600">{error}</p>}
-        <button className="bg-blue-500 text-white p-2" type="submit">
+        <button className="bg-primary text-white p-2" type="submit">
           Sign Up
         </button>
         </form>

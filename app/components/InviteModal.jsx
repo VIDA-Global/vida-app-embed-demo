@@ -54,7 +54,7 @@ export default function InviteModal({ open, onClose }) {
             <button onClick={onClose} className="bg-gray-100 text-gray-500 p-2 px-3 rounded-lg">
               Cancel
             </button>
-            <button onClick={invite} className="bg-blue-500 text-white p-2 px-3 rounded-lg">
+            <button onClick={invite} className="bg-primary text-white p-2 px-3 rounded-lg">
               Invite
             </button>
           </div>
