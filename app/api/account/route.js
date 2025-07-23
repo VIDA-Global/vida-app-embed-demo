@@ -19,21 +19,24 @@ export async function GET(req) {
 
   try {
     const url = new URL(
-      "https://vida.io/api/v2/getAccountByExternalId"
+      "https://api.vida.dev/api/v2/getAccountByExternalId"
     );
     url.searchParams.set("token", vidaToken);
     url.searchParams.set("externalAccountId", user.accountId);
 
+    // Fetch account by external ID and parse JSON once
     let res = await fetch(url.toString(), { method: "GET" });
+    let data = await res.json();
+    console.log("Account fetch response:", data);
 
-    if (!res.ok) {
-      // If the account doesn't exist, create it under the reseller account
+    // If HTTP error or API-level failure, create organization
+    if (!res.ok || data.success === false) {
       const accounts = await getAccounts();
       const acc = accounts.find((a) => a.id === user.accountId);
       const orgName = acc ? acc.name : `Account ${user.accountId}`;
 
       const createUrl = new URL(
-        "https://vida.io/api/v2/createOrganization"
+        "https://api.vida.dev/api/v2/createOrganization"
       );
       createUrl.searchParams.set("token", vidaToken);
       createUrl.searchParams.set("targetResellerId", resellerId);
@@ -47,20 +50,22 @@ export async function GET(req) {
           externalAccountId: user.accountId,
         }),
       });
+      let createData = await res.json();
+      console.log("Creating organization response:", createData);
 
-      if (!res.ok) {
+      if (!res.ok || createData.success === false) {
         return NextResponse.json(
-          { error: "Failed to create organization" },
+          { error: createData.message || "Failed to create organization" },
           { status: res.status }
         );
       }
-    }
 
-    const data = await res.json();
+      data = createData;
+    }
 
     // Fetch one-time authentication token for the user
     const tokenUrl = new URL(
-      "https://vida.io/api/v2/auth/account/oneTimeAuthToken"
+      "https://api.vida.dev/api/v2/auth/account/oneTimeAuthToken"
     );
     tokenUrl.searchParams.set("token", vidaToken);
     tokenUrl.searchParams.set("email", user.email);
@@ -69,6 +74,7 @@ export async function GET(req) {
     let oneTimeAuthToken = null;
     try {
       const tokenRes = await fetch(tokenUrl.toString(), { method: "GET" });
+      console.log("One-time auth token response:", tokenRes.status);
       if (tokenRes.ok) {
         const tokenData = await tokenRes.json();
         oneTimeAuthToken = tokenData.authToken || null;
