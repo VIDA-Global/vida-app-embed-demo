@@ -38,6 +38,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Environment Variables
 
-Create a `.env.local` file based on `.env.example` and add your Vida API token.
-The variable `VIDA_API_TOKEN` is used by the `/api/account` route to call
-Vida's `getAccountByExternalId` endpoint.
+Create a `.env.local` file based on `.env.example` and add your Vida API token
+and reseller ID. The variables `VIDA_API_TOKEN` and `VIDA_RESELLER_ID` are used
+by the `/api/account` route to call Vida's APIs for fetching and creating
+organizations. The reseller ID identifies the reseller account under which new
+organizations are created when an account is missing in Vida.
