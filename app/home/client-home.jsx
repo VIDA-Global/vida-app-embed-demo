@@ -8,15 +8,16 @@ export default function ClientHome({ user }) {
   const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
   const [invitePassword, setInvitePassword] = useState("");
-  const [account, setAccount] = useState(null);
+  const [vida, setVida] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch("/api/account");
+        const res = await fetch("/api/vida");
         if (res.ok) {
-          setAccount(await res.json());
+          const data = await res.json();
+          setVida(data);
         }
       } catch (err) {
         console.error(err);
@@ -30,7 +31,11 @@ export default function ClientHome({ user }) {
     await fetch("/api/invite", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fullName: inviteName, email: inviteEmail, password: invitePassword }),
+      body: JSON.stringify({
+        fullName: inviteName,
+        email: inviteEmail,
+        password: invitePassword,
+      }),
     });
     setInviteName("");
     setInviteEmail("");
@@ -45,25 +50,31 @@ export default function ClientHome({ user }) {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="flex justify-between items-center p-4 border-b">
+      <header className="flex justify-between items-center p-4 border-b border-gray-200">
         <div className="text-xl font-bold">Alma AI</div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <button
             onClick={() => setShowInvite(true)}
-            className="underline mr-4"
+            className="underline"
           >
             Invite
           </button>
-          <span>{user.fullName}</span>
+          <button onClick={logout} className="underline">
+            Log Out
+          </button>
+          <div className="flex items-center gap-2">
+            <div>
+          <div>{user.fullName}</div>
+          <div>{JSON.stringify(user)}</div>
+          </div>
           <Image
-            src="/avatar-placeholder.png"
+          className="rounded-full"
+            src="/avatar.png"
             alt="avatar"
             width={32}
             height={32}
           />
-          <button onClick={logout} className="ml-4 underline">
-            Log Out
-          </button>
+          </div>
         </div>
       </header>
       {showInvite && (
@@ -106,7 +117,7 @@ export default function ClientHome({ user }) {
           </div>
         </div>
       )}
-      {account && (
+      {/* {account && (
         <>
           {account.oneTimeAuthToken && (
             <div className="p-4 bg-green-100 text-sm break-all">
@@ -117,8 +128,19 @@ export default function ClientHome({ user }) {
             {JSON.stringify(account, null, 2)}
           </pre>
         </>
+      )} */}
+      {vida?.oneTimeAuthToken && (
+        <iframe
+          className="flex-grow"
+          src={
+            vida?.oneTimeAuthToken
+              ? `https://vida.io/app/embed?authToken=${
+                  vida.oneTimeAuthToken
+                }&email=${encodeURIComponent(user.email)}`
+              : "https://vida.io/app/embed"
+          }
+        />
       )}
-      <iframe className="flex-grow" src="https://vida.io/app/embed" />
     </div>
   );
 }
