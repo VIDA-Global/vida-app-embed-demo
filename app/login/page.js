@@ -32,14 +32,14 @@ export default function Login() {
         <h1 className="text-2xl mb-6 text-center font-bold">Log In to Alma</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
         <input
-          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
+          className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 autofill:bg-white"
+          className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 autofill:bg-white"
           placeholder="Password"
           type="password"
           value={password}
