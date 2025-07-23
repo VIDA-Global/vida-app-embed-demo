@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoggedOutHeader from "../components/LoggedOutHeader";
-import { APP_NAME } from "../lib/config.js";
+import { APP_NAME } from "../../lib/config.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");

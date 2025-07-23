@@ -6,6 +6,7 @@ import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../lib/config.js";
 
 export default function ClientHome({ user, account }) {
   const [vida, setVida] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -14,9 +15,11 @@ export default function ClientHome({ user, account }) {
         if (res.ok) {
           const data = await res.json();
           setVida(data);
+          setLoading(false);
         }
       } catch (err) {
         console.error(err);
+        setLoading(false);
       }
     };
     load();
@@ -37,13 +40,17 @@ export default function ClientHome({ user, account }) {
         <UserMenu user={user} account={account} />
         <div className="border-t border-[rgba(0,0,0,0.075)] absolute left-0 right-0 top-14 mt-[px] shadow" />
       </header>
-      {vida?.oneTimeAuthToken && (
-        <iframe
-          className="flex-grow"
-          src={`${VIDA_EMBED_BASE_URL}?authToken=${
-            vida.oneTimeAuthToken
-          }&email=${encodeURIComponent(user.email)}`}
-        />
+      {loading ? (
+        <div className="flex-grow flex items-center justify-center text-gray-600">
+          Loading account...
+        </div>
+      ) : (
+        vida?.oneTimeAuthToken && (
+          <iframe
+            className="flex-grow"
+            src={`${VIDA_EMBED_BASE_URL}?authToken=${vida.oneTimeAuthToken}&email=${encodeURIComponent(user.email)}`}
+          />
+        )
       )}
     </div>
   );
