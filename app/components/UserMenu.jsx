@@ -39,7 +39,7 @@ export default function UserMenu({ user, account }) {
         />
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow overflow-hidden z-10">
+        <div className="absolute right-0 mt-2 w-40 bg-white border border-[rgba(0,0,0,0.075)] rounded-lg shadow overflow-hidden z-10">
           <button
             onClick={() => {
               setShowInvite(true);
