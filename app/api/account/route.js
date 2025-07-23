@@ -57,7 +57,27 @@ export async function GET(req) {
     }
 
     const data = await res.json();
-    return NextResponse.json(data);
+
+    // Fetch one-time authentication token for the user
+    const tokenUrl = new URL(
+      "https://vida.io/api/v2/auth/account/oneTimeAuthToken"
+    );
+    tokenUrl.searchParams.set("token", vidaToken);
+    tokenUrl.searchParams.set("email", user.email);
+    tokenUrl.searchParams.set("externalAccountId", user.accountId);
+
+    let oneTimeAuthToken = null;
+    try {
+      const tokenRes = await fetch(tokenUrl.toString(), { method: "GET" });
+      if (tokenRes.ok) {
+        const tokenData = await tokenRes.json();
+        oneTimeAuthToken = tokenData.authToken || null;
+      }
+    } catch (err) {
+      // ignore token errors
+    }
+
+    return NextResponse.json({ account: data, oneTimeAuthToken });
   } catch (err) {
     return NextResponse.json({ error: "Request failed" }, { status: 500 });
   }

@@ -105,12 +105,19 @@ export default function ClientHome({ user }) {
             </div>
           </div>
         </div>
-      )
+      )}
       {account && (
-        <pre className="p-4 bg-gray-100 overflow-auto">
-          {JSON.stringify(account, null, 2)}
-        </pre>
-      )
+        <>
+          {account.oneTimeAuthToken && (
+            <div className="p-4 bg-green-100 text-sm break-all">
+              One Time Token: {account.oneTimeAuthToken}
+            </div>
+          )}
+          <pre className="p-4 bg-gray-100 overflow-auto">
+            {JSON.stringify(account, null, 2)}
+          </pre>
+        </>
+      )}
       <iframe className="flex-grow" src="https://vida.io/app/embed" />
     </div>
   );
