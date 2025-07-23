@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import LoggedOutHeader from "../components/LoggedOutHeader";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -25,9 +26,11 @@ export default function Login() {
   };
 
   return (
-    <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl mb-4 text-center">Login</h1>
-      <form onSubmit={submit} className="flex flex-col gap-3">
+    <>
+      <LoggedOutHeader />
+      <div className="p-8 max-w-md mx-auto">
+        <h1 className="text-2xl mb-4 text-center">Login</h1>
+        <form onSubmit={submit} className="flex flex-col gap-3">
         <input
           className="border border-gray-300 p-2 rounded-lg"
           placeholder="Email"
@@ -53,6 +56,7 @@ export default function Login() {
           Sign Up
         </a>
       </p>
-    </div>
+      </div>
+    </>
   );
 }

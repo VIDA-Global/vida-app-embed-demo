@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import LoggedOutHeader from "../components/LoggedOutHeader";
 
 export default function Signup() {
   const [accountName, setAccountName] = useState("");
@@ -27,9 +28,11 @@ export default function Signup() {
   };
 
   return (
-    <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl mb-4">Sign Up for Alma AI</h1>
-      <form onSubmit={submit} className="flex flex-col gap-3">
+    <>
+      <LoggedOutHeader />
+      <div className="p-8 max-w-md mx-auto">
+        <h1 className="text-2xl mb-4">Sign Up for Alma AI</h1>
+        <form onSubmit={submit} className="flex flex-col gap-3">
         <input
           className="border p-2"
           placeholder="Account Name"
@@ -60,7 +63,8 @@ export default function Signup() {
         <button className="bg-blue-500 text-white p-2" type="submit">
           Sign Up
         </button>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 }
