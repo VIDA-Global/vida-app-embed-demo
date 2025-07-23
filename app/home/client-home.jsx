@@ -23,7 +23,7 @@ export default function ClientHome({ user, account }) {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="flex justify-between items-center p-4 gap-2">
+      <header className="flex justify-between items-center p-4 gap-2 relatie">
         <Image
           src="/logo.png"
           alt="logo"
@@ -34,10 +34,11 @@ export default function ClientHome({ user, account }) {
         <div className="text-lg font-semibold flex-1">Alma AI</div>
 
         <UserMenu user={user} account={account} />
+        <div className="border-t border-[rgba(0,0,0,0.05)] fixed left-0 right-0 top-16 mt-0.5" />
       </header>
       {vida?.oneTimeAuthToken && (
         <iframe
-          className="flex-grow border-t border-gray-200"
+          className="flex-grow "
           src={`https://ninjoah.ngrok.io/app/embed?authToken=${
             vida.oneTimeAuthToken
           }&email=${encodeURIComponent(user.email)}`}

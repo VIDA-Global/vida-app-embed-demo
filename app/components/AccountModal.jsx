@@ -43,7 +43,7 @@ export default function AccountModal({ open, onClose, account }) {
       <div className="bg-white p-5 rounded-2xl shadow max-w-md w-full">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Account</h2>
-          <button onClick={onClose} className="underline">
+          <button onClick={onClose} className="text-gray-700">
             Close
           </button>
         </div>
@@ -54,7 +54,7 @@ export default function AccountModal({ open, onClose, account }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <div className="flex justify-end gap-2 mt-3">
+          <div className="flex justify-end gap-2 mt-2">
             <button
               onClick={onClose}
               className="bg-gray-100 text-gray-500 p-2 px-3 rounded-lg"
@@ -63,14 +63,14 @@ export default function AccountModal({ open, onClose, account }) {
             </button>
             <button
               onClick={save}
-              className="bg-primary text-white p-2 px-3 rounded-lg"
+              className="bg-purple-700 text-white p-2 px-3 rounded-lg"
             >
               Save
             </button>
           </div>
         </div>
-        <div className="border-t border-gray-200 mt-4 pt-4">
-          <button onClick={deleteAccount} className="text-red-600 underline">
+        <div className="border-t border-gray-200 pb-5 pt-5 mt-5 -mb-5 -mx-5 px-5 bg-gray-50 rounded-bl-2xl rounded-br-2xl">
+          <button onClick={deleteAccount} className="text-gray-700">
             Delete Account
           </button>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import InviteModal from "./InviteModal";
+import Image from "next/image";
 
 export default function ManageTeamModal({ open, onClose, user }) {
   const [members, setMembers] = useState([]);
@@ -37,7 +38,7 @@ export default function ManageTeamModal({ open, onClose, user }) {
       <div className="bg-white p-5 rounded-2xl shadow max-w-md w-full">
         <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold">Manage Team</h2>
-          <button onClick={onClose} className="underline">
+          <button onClick={onClose} className="text-gray-700">
             Close
           </button>
         </div>
@@ -46,8 +47,15 @@ export default function ManageTeamModal({ open, onClose, user }) {
         ) : (
           <ul className="flex flex-col gap-2 mb-4">
             {members.map((m) => (
-              <li key={m.id} className="flex justify-between items-center rounded-lg bg-gray-100 p-3 -mx-2">
-                <span>{m.fullName || m.email}</span>
+              <li key={m.id} className="flex justify-between items-center rounded-lg bg-gray-100 p-3 -mx-2 gap-2">
+                <Image
+                          className="rounded-full"
+                          src="/avatar.png"
+                          alt="avatar"
+                          width={20}
+                          height={20}
+                        />
+                <div className="flex-1">{m.fullName || m.email}</div>
                 {m.id !== user.id && (
                   <button
                     onClick={() => removeUser(m.id)}
@@ -60,8 +68,8 @@ export default function ManageTeamModal({ open, onClose, user }) {
             ))}
           </ul>
         )}
-        <div className="flex justify-between mt-6">
-          <button onClick={() => setShowInvite(true)} className="text-primary">
+        <div className="border-t border-gray-200 pb-5 pt-5 mt-8 -mb-5 -mx-5 px-5 bg-gray-50 rounded-bl-2xl rounded-br-2xl">
+          <button onClick={() => setShowInvite(true)} className="text-purple-700">
             Invite
           </button>
         </div>

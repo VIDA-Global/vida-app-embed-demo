@@ -16,7 +16,7 @@ export default async function Index() {
         <h1 className="text-4xl font-bold mb-6 text-center">Welcome to Alma AI</h1>
         <a
           href="/signup"
-          className="bg-primary text-white px-6 py-3 rounded-lg"
+          className="bg-purple-700 text-white px-6 py-3 rounded-lg"
         >
           Get Started
         </a>

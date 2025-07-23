@@ -32,23 +32,23 @@ export default function Login() {
         <h1 className="text-2xl mb-6 text-center font-medium">Login</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
         <input
-          className="border border-gray-300 p-2 rounded-lg"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className="border border-gray-300 p-2 rounded-lg"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 autofill:bg-white"
           placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="text-red-600">{error}</p>}
-        <button className="bg-primary text-white p-2 rounded-lg" type="submit">
+        <button className="bg-purple-700 text-white p-2 rounded-lg" type="submit">
           Login
         </button>
+        {error && <p className="text-red-600">{error}</p>}
       </form>
       </div>
     </>

@@ -34,35 +34,35 @@ export default function Signup() {
         <h1 className="text-2xl mb-6 text-center font-medium">Sign Up for Alma AI</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
         <input
-          className="border border-gray-300 p-2 rounded-lg"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
           placeholder="Account Name"
           value={accountName}
           onChange={(e) => setAccountName(e.target.value)}
         />
         <input
-          className="border border-gray-300 p-2 rounded-lg"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
           placeholder="Full Name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
         />
         <input
-          className="border border-gray-300 p-2 rounded-lg"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className="border border-gray-300 p-2 rounded-lg"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
           placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="text-red-600">{error}</p>}
-        <button className="bg-primary text-white p-2" type="submit">
+        <button className="bg-purple-700 text-white p-2 rounded-lg" type="submit">
           Sign Up
         </button>
+        {error && <div className="text-red-600 mt-4 text-center" onClick={() => setError(null)}>{error}</div>}
         </form>
       </div>
     </>
