@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoggedOutHeader from "../components/LoggedOutHeader";
+import { APP_NAME } from "../lib/config.js";
 
 export default function Signup() {
   const [accountName, setAccountName] = useState("");
@@ -32,7 +33,7 @@ export default function Signup() {
       <LoggedOutHeader />
       <div className="p-8 max-w-md mx-auto">
         <h1 className="text-2xl mb-3 text-center font-bold">
-          Sign Up for Alma
+          Sign Up for {APP_NAME}
         </h1>
         <h2 className="text-center mb-10">Enter your information below to create an account and get started.</h2>
         <form onSubmit={submit} className="flex flex-col gap-3">
