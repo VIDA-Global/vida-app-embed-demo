@@ -4,6 +4,9 @@ import { getUserFromSession } from "../../lib/auth.js";
 import { getAccounts } from "../../lib/db.js";
 import ClientHome from "./client-home";
 
+// Authenticated users land on this page. `ClientHome` will fetch a Vida
+// one-time auth token and render the embedded Vida UI.
+
 export default async function HomePage() {
   const session = (await cookies()).get("session")?.value;
   const user = await getUserFromSession(session);
