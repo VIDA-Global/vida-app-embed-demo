@@ -31,7 +31,7 @@ export default function UserMenu({ user, account }) {
           )}
         </div>
         <Image
-          className="rounded-full grayscale"
+          className="rounded-full"
           src="/avatar.png"
           alt="avatar"
           width={32}

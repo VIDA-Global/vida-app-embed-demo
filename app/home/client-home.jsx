@@ -25,7 +25,7 @@ export default function ClientHome({ user, account }) {
     <div className="flex flex-col h-screen">
       <header className="flex justify-between items-center p-4 gap-2">
         <Image
-          src="/logo.jpg"
+          src="/logo.png"
           alt="logo"
           className="rounded-lg scale-90"
           width={32}
@@ -35,18 +35,6 @@ export default function ClientHome({ user, account }) {
 
         <UserMenu user={user} account={account} />
       </header>
-      {/* {account && (
-        <>
-          {account.oneTimeAuthToken && (
-            <div className="p-4 bg-green-100 text-sm break-all">
-              One Time Token: {account.oneTimeAuthToken}
-            </div>
-          )}
-          <pre className="p-4 bg-gray-100 overflow-auto">
-            {JSON.stringify(account, null, 2)}
-          </pre>
-        </>
-      )} */}
       {vida?.oneTimeAuthToken && (
         <iframe
           className="flex-grow border-t border-gray-200"

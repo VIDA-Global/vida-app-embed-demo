@@ -10,7 +10,7 @@ export const metadata = {
   title: "Alma AI",
   description: "Demo for embedding the Vida app",
   icons: {
-    icon: "/logo.jpg",
+    icon: "/logo.png",
   },
 };
 
