@@ -1,6 +1,6 @@
 # Vida App Embed Demo
 
-This project demonstrates how to embed the [Vida](https://vida.io) web app inside a Next.js application. It also includes a simple email/password authentication flow and shows how to trigger a demo phone call using Vida's embed script.
+This project demonstrates how resellers of Vida can embed the [Vida](https://vida.io) web app inside a Next.js application. It walks through provisioning organizations under a reseller account, obtaining one-time authentication tokens and loading the Vida app within an iframe. A minimal email/password authentication flow is provided along with an example of triggering a phone call using Vida's embed script.
 
 ## Running the project
 
@@ -18,15 +18,15 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 Copy `.env.example` to `.env.local` and provide your Vida credentials:
 
 - `VIDA_API_TOKEN` – API token with access to Vida's public API
-- `VIDA_RESELLER_ID` – reseller ID used when creating organizations
+- `VIDA_RESELLER_ID` – your reseller ID used when creating organizations
 
-These values are used by `app/api/vida/route.js` when calling Vida's API.
+These values are used by `app/api/vida/route.js` when calling Vida's API. They ensure that any organizations created through the demo are associated with your reseller account.
 
 ## How embedding works
 
-1. When an authenticated user visits `/home`, the `ClientHome` component requests `/api/vida` to fetch or create the user's organization in Vida. The endpoint also requests a one‑time authentication token.
-2. The one‑time token and the user's email are passed to an `<iframe>` pointing at the Vida web app (`VIDA_EMBED_BASE_URL`). This logs the user into Vida automatically.
-3. The landing page contains a button with the `data-vida-button` attribute. Vida's embed script (loaded globally in `app/layout.js`) turns this into a clickable call button.
+1. When an authenticated user visits `/home`, the `ClientHome` component requests `/api/vida`. This endpoint uses `VIDA_API_TOKEN` and `VIDA_RESELLER_ID` to fetch or create an organization under your reseller account and to obtain a one‑time authentication token.
+2. The token and the user's email are passed to an `<iframe>` pointing at the Vida web app (`VIDA_EMBED_BASE_URL`). This automatically logs the user into Vida inside your application.
+3. The landing page also contains a button with the `data-vida-button` attribute. Vida's embed script (loaded globally in `app/layout.js`) turns this into a clickable call button.
 
 See comments in the source files for further details on how each piece works:
 
