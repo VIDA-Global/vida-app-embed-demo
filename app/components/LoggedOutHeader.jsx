@@ -12,11 +12,11 @@ export default function LoggedOutHeader() {
       <div className="flex gap-2 ml-auto">
         <Link
           href="/login"
-          className="px-3 py-1 rounded-lg border border-blue-500 text-blue-500"
+          className="px-3 py-1 rounded-lg border border-primary text-primary"
         >
           Log In
         </Link>
-        <Link href="/signup" className="px-3 py-1 rounded-lg bg-blue-500 text-white">
+        <Link href="/signup" className="px-3 py-1 rounded-lg bg-primary text-white">
           Sign Up
         </Link>
       </div>

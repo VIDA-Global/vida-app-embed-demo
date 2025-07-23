@@ -61,7 +61,7 @@ export default function ManageTeamModal({ open, onClose, user }) {
           </ul>
         )}
         <div className="flex justify-between mt-6">
-          <button onClick={() => setShowInvite(true)} className="text-blue-600">
+          <button onClick={() => setShowInvite(true)} className="text-primary">
             Invite
           </button>
         </div>

@@ -46,13 +46,13 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && <p className="text-red-600">{error}</p>}
-        <button className="bg-blue-500 text-white p-2 rounded-lg" type="submit">
+        <button className="bg-primary text-white p-2 rounded-lg" type="submit">
           Login
         </button>
       </form>
       <p className="mt-4">
         or{" "}
-        <a href="/signup" className="text-blue-500 underline">
+        <a href="/signup" className="text-primary underline">
           Sign Up
         </a>
       </p>
