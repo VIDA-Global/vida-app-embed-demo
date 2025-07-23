@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +8,22 @@ export default function ClientHome({ user }) {
   const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
   const [invitePassword, setInvitePassword] = useState("");
+  const [account, setAccount] = useState(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch("/api/account");
+        if (res.ok) {
+          setAccount(await res.json());
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    load();
+  }, []);
 
   const invite = async () => {
     if (!inviteName || !inviteEmail || !invitePassword) return;
@@ -90,6 +105,11 @@ export default function ClientHome({ user }) {
             </div>
           </div>
         </div>
+      )
+      {account && (
+        <pre className="p-4 bg-gray-100 overflow-auto">
+          {JSON.stringify(account, null, 2)}
+        </pre>
       )
       <iframe className="flex-grow" src="https://vida.io/app/embed" />
     </div>

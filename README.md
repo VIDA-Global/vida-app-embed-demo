@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Environment Variables
+
+Create a `.env.local` file based on `.env.example` and add your Vida API token
+and reseller ID. The variables `VIDA_API_TOKEN` and `VIDA_RESELLER_ID` are used
+by the `/api/account` route to call Vida's APIs for fetching and creating
+organizations. The reseller ID identifies the reseller account under which new
+organizations are created when an account is missing in Vida.
