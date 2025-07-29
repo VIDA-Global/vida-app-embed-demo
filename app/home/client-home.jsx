@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
+import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../config/constants.js";
 import UserMenu from "../components/UserMenu";
 import Image from "next/image";
-import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../config/constants.js";
 
 export default function ClientHome({ user, account }) {
   const [vida, setVida] = useState(null);
@@ -38,8 +38,6 @@ export default function ClientHome({ user, account }) {
           width={32}
           height={32}
         />
-        <div className="text-lg font-semibold flex-1">{APP_NAME}</div>
-
         <UserMenu user={user} account={account} />
         <div className="border-t border-[rgba(0,0,0,0.075)] absolute left-0 right-0 top-14 mt-[px] shadow" />
       </header>
@@ -51,10 +49,12 @@ export default function ClientHome({ user, account }) {
         vida?.oneTimeAuthToken && (
           <iframe
             className="flex-grow"
-          // The Vida web app is embedded directly in our page. We pass the
-          // one-time token and the user's email so the session is created
-          // automatically.
-            src={`${VIDA_EMBED_BASE_URL}?authToken=${vida.oneTimeAuthToken}&email=${encodeURIComponent(user.email)}`}
+            // The Vida web app is embedded directly in our page. We pass the
+            // one-time token and the user's email so the session is created
+            // automatically.
+            src={`${VIDA_EMBED_BASE_URL}?authToken=${
+              vida.oneTimeAuthToken
+            }&email=${encodeURIComponent(user.email)}`}
           />
         )
       )}

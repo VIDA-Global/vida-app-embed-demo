@@ -1,7 +1,11 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { APP_NAME, VIDA_SCRIPT_SRC } from "../config/constants.js";
+import {
+  APP_NAME,
+  VIDA_BUTTON_SCRIPT_SRC,
+  VIDA_MODAL_SCRIPT_SRC,
+} from "../config/constants.js";
 
 // The Vida embed script is loaded globally here so that any page can use the
 // `data-vida-button` attribute or embed the Vida app iframe.
@@ -23,7 +27,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <Script src={VIDA_SCRIPT_SRC} strategy="afterInteractive" />
+        <Script src={VIDA_BUTTON_SCRIPT_SRC} strategy="afterInteractive" />
+        <Script src={VIDA_MODAL_SCRIPT_SRC} strategy="afterInteractive" />
       </head>
       <body className="antialiased">{children}</body>
     </html>

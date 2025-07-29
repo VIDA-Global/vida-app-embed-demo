@@ -9,11 +9,18 @@ export const VIDA_API_BASE_URL = "https://api.vida.dev/api/v2";
 // URL of the Vida web app that we embed via an iframe once the user is
 // authenticated with a one‑time auth token.
 
-export const VIDA_EMBED_BASE_URL = "https://RESELLER_USERNAME.automatedphone.ai/app/embed";
+// Your reseller domain name, e.g. "$username.automatedphone.ai".
+export const VIDA_DOMAIN = "ninjoah-reseller.ngrok.io";
+
+// Base URL for the iframe that embeds the Vida app in the demo.
+export const VIDA_EMBED_BASE_URL = `https://${VIDA_DOMAIN}/app/embed`;
 
 // The script that powers the Vida button is inserted globally in `app/layout.js`.
-export const VIDA_SCRIPT_SRC = "https://vida.io/embed/button/v1/scriptMinified.js";
+export const VIDA_BUTTON_SCRIPT_SRC = `https://${VIDA_DOMAIN}/embed/button/v1/script.js`;
+
+// The script that powers the Vida modal is inserted globally in `app/layout.js`.
+export const VIDA_MODAL_SCRIPT_SRC = `https://${VIDA_DOMAIN}/embed/modal/v1/script.js`;
 
 // Target account used by the Vida button on the landing page to demonstrate an
 // outbound call. This is typically your Vida username or slug.
-export const VIDA_TARGET = "RESELLER_USERNAME";
+export const VIDA_TARGET = "alma";
