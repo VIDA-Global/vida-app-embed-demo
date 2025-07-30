@@ -1,10 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import {
-  APP_NAME,
-  VIDA_EMBED_BASE_URL,
-  VIDA_DOMAIN,
-} from "../../config/constants.js";
+import { APP_NAME, VIDA_DOMAIN } from "../../config/constants.js";
 import UserMenu from "../components/UserMenu";
 import Image from "next/image";
 
@@ -33,6 +29,10 @@ export default function ClientHome({ user, account }) {
       }),
     },
   };
+  const handleModalClose = () => {
+    alert("All modals closed");
+    // e.g. refresh data or re-enable scrolling…
+  };
 
   const handlePressTest = async () => {
     try {
@@ -41,6 +41,7 @@ export default function ClientHome({ user, account }) {
         const data = await res.json();
         const params = examples[selectedExample].getParams(vida);
         window.vdaModal.open(VIDA_DOMAIN, data.oneTimeAuthToken, params);
+        window.vdaModal.onClose(handleModalClose);
       }
     } catch (err) {
       console.error(err);
@@ -48,15 +49,6 @@ export default function ClientHome({ user, account }) {
   };
 
   useEffect(() => {
-    const handleModalClose = () => {
-      alert("All modals closed");
-      // e.g. refresh data or re-enable scrolling…
-    };
-
-    if (window.vdaModal?.onClose) {
-      // Register the close listener
-      window.vdaModal.onClose(handleModalClose);
-    }
     return () => {
       window.vdaModal?.offClose(handleModalClose);
     };
