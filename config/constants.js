@@ -10,7 +10,7 @@ export const VIDA_API_BASE_URL = "https://api.vida.dev/api/v2";
 // authenticated with a one‑time auth token.
 
 // Your reseller domain name, e.g. "$username.automatedphone.ai".
-export const VIDA_DOMAIN = "ninjoah-reseller.ngrok.io";
+export const VIDA_DOMAIN = "alma.automatedphone.ai";
 
 // Base URL for the iframe that embeds the Vida app in the demo.
 export const VIDA_EMBED_BASE_URL = `https://${VIDA_DOMAIN}/app/embed`;
