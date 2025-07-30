@@ -18,9 +18,6 @@ export const VIDA_EMBED_BASE_URL = `https://${VIDA_DOMAIN}/app/embed`;
 // The script that powers the Vida button is inserted globally in `app/layout.js`.
 export const VIDA_BUTTON_SCRIPT_SRC = `https://${VIDA_DOMAIN}/embed/button/v1/script.js`;
 
-// The script that powers the Vida modal is inserted globally in `app/layout.js`.
-export const VIDA_MODAL_SCRIPT_SRC = `https://${VIDA_DOMAIN}/embed/modal/v1/script.js`;
-
 // Target account used by the Vida button on the landing page to demonstrate an
 // outbound call. This is typically your Vida username or slug.
 export const VIDA_TARGET = "alma";

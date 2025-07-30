@@ -4,7 +4,6 @@ import Script from "next/script";
 import {
   APP_NAME,
   VIDA_BUTTON_SCRIPT_SRC,
-  VIDA_MODAL_SCRIPT_SRC,
 } from "../config/constants.js";
 
 // The Vida embed script is loaded globally here so that any page can use the
@@ -28,7 +27,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.variable}>
       <head>
         <Script src={VIDA_BUTTON_SCRIPT_SRC} strategy="afterInteractive" />
-        <Script src={VIDA_MODAL_SCRIPT_SRC} strategy="afterInteractive" />
       </head>
       <body className="antialiased">{children}</body>
     </html>
