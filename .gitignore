@@ -42,4 +42,5 @@ yarn-error.log*
 next-env.d.ts
 
 # local data files
-/data/*.json
+/data/**
+!/data/.gitkeep
