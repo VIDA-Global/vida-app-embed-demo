@@ -36,6 +36,7 @@ See comments in the source files for further details on how each piece works:
 - `app/api/vida/route.js` – proxy route that interacts with Vida's API
 - `lib/vida.js` – small helper for GET/POST requests to Vida
 - `app/home/client-home.jsx` – embeds the Vida app iframe
+- `app/modalDemo/client-home.jsx` – opens a Vida modal on button click
 
 ## Deploying
 
