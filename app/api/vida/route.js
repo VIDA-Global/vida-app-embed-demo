@@ -8,6 +8,11 @@ import { vidaGet, vidaPost } from "../../../lib/vida.js";
 // current user's organization in Vida and to obtain a one-time auth token that
 // allows embedding the Vida web app without requiring the user to log in.
 
+// In-memory lock to avoid duplicate organization creation if this route is
+// called concurrently (e.g., React Strict Mode double-invoking effects in dev).
+// Keyed by externalAccountId; best-effort only (good enough for the demo).
+const inFlightCreates = new Map();
+
 export async function GET(req) {
   const token = req.cookies.get("session")?.value;
   const user = await getUserFromSession(token);
@@ -34,38 +39,64 @@ export async function GET(req) {
       "getAccountByExternalId",
       { token: vidaToken, externalAccountId: user.accountId }
     );
-    console.log("Account fetch response:", accountData);
+    //console.log("Account fetch response:", accountData);
 
     let account = accountData?.account;
 
     // ---------------------------------------------
     // 2. Create organization if account is missing
     // ---------------------------------------------
-    if (!accountRes.ok || accountData?.success === false) {
-      const accounts = await getAccounts();
-      const acc = accounts.find((a) => a.id === user.accountId);
-      const orgName = acc ? acc.name : `Account ${user.accountId}`;
+    if (!accountRes.ok || accountData?.success === false || !account) {
+      const key = String(user.accountId);
 
-      const { res: createRes, data: createData } = await vidaPost(
-        "createOrganization",
-        { token: vidaToken, targetResellerId: resellerId },
-        {
-          orgName,
-          email: user.email,
-          externalAccountId: user.accountId,
-          vidaPremium: false
-        }
-      );
-      console.log("Creating organization response:", createData);
+      let createPromise = inFlightCreates.get(key);
+      if (!createPromise) {
+        createPromise = (async () => {
+          const accounts = await getAccounts();
+          const acc = accounts.find((a) => a.id === user.accountId);
+          const orgName = acc ? acc.name : `Account ${user.accountId}`;
 
-      if (!createRes.ok || createData?.success === false) {
-        return NextResponse.json(
-          { error: createData?.message || "Failed to create organization" },
-          { status: createRes.status }
-        );
+          const { res: createRes, data: createData } = await vidaPost(
+            "createOrganization",
+            { token: vidaToken, targetResellerId: resellerId },
+            {
+              orgName,
+              email: user.email,
+              externalAccountId: user.accountId,
+              vidaPremium: false,
+            }
+          );
+          //console.log("Creating organization response:", createData);
+
+          // If creation failed (e.g., due to a race), refetch account once
+          // before surfacing an error.
+          if (!createRes.ok || createData?.success === false) {
+            const { res: refetchRes, data: refetchData } = await vidaGet(
+              "getAccountByExternalId",
+              { token: vidaToken, externalAccountId: user.accountId }
+            );
+            if (refetchRes.ok && refetchData?.account) {
+              return refetchData.account;
+            }
+            throw new Error(createData?.message || "Failed to create organization");
+          }
+
+          return createData.account;
+        })()
+          .finally(() => {
+            inFlightCreates.delete(key);
+          });
+        inFlightCreates.set(key, createPromise);
       }
 
-      account = createData.account;
+      try {
+        account = await createPromise;
+      } catch (err) {
+        return NextResponse.json(
+          { error: err?.message || "Failed to create organization" },
+          { status: 500 }
+        );
+      }
     }
 
     // ---------------------------------------------
@@ -81,7 +112,7 @@ export async function GET(req) {
           externalAccountId: user.accountId,
         }
       );
-      console.log("One-time auth token response:", tokenRes.status);
+      //console.log("One-time auth token response:", tokenRes.status);
       if (tokenRes.ok) {
         oneTimeAuthToken = tokenData?.authToken || null;
       }
