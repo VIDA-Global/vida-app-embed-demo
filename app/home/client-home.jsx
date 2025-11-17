@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import UserMenu from "../components/UserMenu";
 import Image from "next/image";
-import { APP_NAME, VIDA_EMBED_BASE_URL } from "../../config/constants.js";
+// Read client-visible values from env
 
 export default function ClientHome({ user, account }) {
   const [vida, setVida] = useState(null);
@@ -37,10 +37,7 @@ export default function ClientHome({ user, account }) {
   const iframeSrc = useMemo(() => {
     if (!vida?.oneTimeAuthToken) return null;
     try {
-      const url = new URL(
-        VIDA_EMBED_BASE_URL,
-        typeof window !== "undefined" ? window.location.origin : "http://localhost"
-      );
+      const url = new URL(process.env.NEXT_PUBLIC_VIDA_EMBED_BASE_URL);
 
       // Collect params, then explicitly URL-encode values once via encodeURIComponent.
       const params = {
@@ -79,7 +76,9 @@ export default function ClientHome({ user, account }) {
           width={32}
           height={32}
         />
-        <div className="text-lg font-semibold flex-1">{APP_NAME}</div>
+        <div className="text-lg font-semibold flex-1">
+          {process.env.NEXT_PUBLIC_APP_NAME}
+        </div>
         <UserMenu user={user} account={account} />
         <div className="border-t border-[rgba(0,0,0,0.075)] absolute left-0 right-0 top-14 mt-[px] shadow" />
       </header>

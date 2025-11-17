@@ -1,12 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import InviteModal from "./InviteModal";
 import Image from "next/image";
 
 export default function ManageTeamModal({ open, onClose, user }) {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showInvite, setShowInvite] = useState(false);
+  // Invite functionality removed
 
   const loadMembers = async () => {
     setLoading(true);
@@ -77,21 +76,7 @@ export default function ManageTeamModal({ open, onClose, user }) {
             ))}
           </ul>
         )}
-        <div className="border-t border-gray-200 pb-5 pt-5 mt-8 -mb-5 -mx-5 px-5 bg-gray-50 rounded-bl-2xl rounded-br-2xl">
-          <button
-            onClick={() => setShowInvite(true)}
-            className="text-purple-700"
-          >
-            Invite
-          </button>
-        </div>
-        <InviteModal
-          open={showInvite}
-          onClose={() => {
-            setShowInvite(false);
-            loadMembers();
-          }}
-        />
+        {/* Invite functionality has been removed */}
       </div>
     </div>
   );

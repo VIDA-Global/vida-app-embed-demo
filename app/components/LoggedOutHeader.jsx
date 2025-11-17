@@ -1,14 +1,22 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { APP_NAME } from "../../config/constants.js";
+// Read app name from env (client-visible)
 
 export default function LoggedOutHeader() {
   return (
     <header className="flex justify-between items-center px-4 h-16 gap-2">
       <Link href="/" className="flex items-center gap-2">
-        <Image src="/logo.png" alt="logo" className="rounded-lg scale-90" width={32} height={32} />
-        <span className="text-lg font-bold">{APP_NAME}</span>
+        <Image
+          src="/logo.png"
+          alt="logo"
+          className="rounded-lg scale-90"
+          width={32}
+          height={32}
+        />
+        <span className="text-lg font-bold">
+          {process.env.NEXT_PUBLIC_APP_NAME || "Alma"}
+        </span>
       </Link>
       <div className="flex gap-2 ml-auto">
         <Link
@@ -17,7 +25,10 @@ export default function LoggedOutHeader() {
         >
           Log In
         </Link>
-        <Link href="/signup" className="px-3 py-1.5 rounded-lg bg-purple-700 text-white font-semibold">
+        <Link
+          href="/signup"
+          className="px-3 py-1.5 rounded-lg bg-purple-700 text-white font-semibold"
+        >
           Sign Up
         </Link>
       </div>

@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { APP_NAME } from "../../config/constants.js";
+// Use env-based app name (client-visible)
 import LoggedOutHeader from "../components/LoggedOutHeader";
 import ErrorModal from "../components/ErrorModal";
-
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -32,32 +31,37 @@ export default function Login() {
     <>
       <LoggedOutHeader />
       <div className="p-8 max-w-md mx-auto">
-        <h1 className="text-2xl mb-6 text-center font-bold">Log In to {APP_NAME}</h1>
+        <h1 className="text-2xl mb-6 text-center font-bold">
+          Log In to {process.env.NEXT_PUBLIC_APP_NAME || "Alma"}
+        </h1>
         <form onSubmit={submit} className="flex flex-col gap-3">
-        <input
-          className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 autofill:bg-white"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <a href="/forgot" className="text-sm text-purple-700 underline">Forgot password?</a>
-        <button className="bg-purple-700 text-white p-3 rounded-lg font-semibold mt-3" type="submit">
-          Log In
-        </button>
-        <ErrorModal
-          open={!!error}
-          onClose={() => setError(null)}
-          message={error}
-        />
-      </form>
+          <input
+            className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="border border-gray-300 p-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 autofill:bg-white"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button
+            className="bg-purple-700 text-white p-3 rounded-lg font-semibold mt-3"
+            type="submit"
+          >
+            Log In
+          </button>
+          <ErrorModal
+            open={!!error}
+            onClose={() => setError(null)}
+            message={error}
+          />
+        </form>
       </div>
     </>
   );

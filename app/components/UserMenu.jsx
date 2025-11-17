@@ -2,13 +2,12 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import InviteModal from "./InviteModal";
 import ManageTeamModal from "./ManageTeamModal";
 import AccountModal from "./AccountModal";
 
 export default function UserMenu({ user, account }) {
   const [open, setOpen] = useState(false);
-  const [showInvite, setShowInvite] = useState(false);
+  // Invite flow removed
   const [showManage, setShowManage] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const router = useRouter();
@@ -51,15 +50,7 @@ export default function UserMenu({ user, account }) {
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-40 bg-white border border-[rgba(0,0,0,0.075)] rounded-lg shadow overflow-hidden z-10">
-          <button
-            onClick={() => {
-              setShowInvite(true);
-              setOpen(false);
-            }}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-          >
-            Invite
-          </button>
+          {/* Invite option removed */}
           <button
             onClick={() => {
               setShowManage(true);
@@ -87,7 +78,7 @@ export default function UserMenu({ user, account }) {
           </button>
         </div>
       )}
-      <InviteModal open={showInvite} onClose={() => setShowInvite(false)} />
+      {/* Invite modal removed */}
       <ManageTeamModal
         user={user}
         open={showManage}

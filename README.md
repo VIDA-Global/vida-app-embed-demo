@@ -15,20 +15,22 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Configuration
 
-Copy `.env.example` to `.env.local` and provide your Vida credentials:
+Copy `.env.example` to `.env.local` and provide your Vida credentials and settings:
 
-- `VIDA_API_TOKEN` – API token with access to Vida's public API
-- `VIDA_RESELLER_ID` – your reseller ID used when creating organizations
-
-Configuration constants referenced throughout the app can be adjusted in
-`config/constants.js`.
+- `VIDA_API_TOKEN` – API token with access to Vida's public API (server)
+- `VIDA_RESELLER_ID` – your reseller ID used when creating organizations (servery)
+- `VIDA_API_BASE_URL` – base URL for Vida's public API (server)
+- `NEXT_PUBLIC_APP_NAME` – name shown in the UI (exposed to the client)
+- `NEXT_PUBLIC_VIDA_EMBED_BASE_URL` – Vida web app base used for the iframe (client)
+- `NEXT_PUBLIC_VIDA_BUTTON_SCRIPT_SRC` – Vida embed script URL (client)
+- `NEXT_PUBLIC_VIDA_TARGET` – default target/username for the demo button (client)
 
 These values are used by `app/api/vida/route.js` when calling Vida's API. They ensure that any organizations created through the demo are associated with your reseller account.
 
 ## How embedding works
 
 1. When an authenticated user visits `/home`, the `ClientHome` component requests `/api/vida`. This endpoint uses `VIDA_API_TOKEN` and `VIDA_RESELLER_ID` to fetch or create an organization under your reseller account and to obtain a one‑time authentication token.
-2. The token and the user's email are passed to an `<iframe>` pointing at the Vida web app (`VIDA_EMBED_BASE_URL`). This automatically logs the user into Vida inside your application.
+2. The token and the user's email are passed to an `<iframe>` pointing at the Vida web app (configured with `NEXT_PUBLIC_VIDA_EMBED_BASE_URL`). This automatically logs the user into Vida inside your application.
 3. The landing page also contains a button with the `data-vida-button` attribute. Vida's embed script (loaded globally in `app/layout.js`) turns this into a clickable call button.
 
 See comments in the source files for further details on how each piece works:
